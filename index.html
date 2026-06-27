@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1d9e75">
+  <meta name="description" content="FileShore menganalisis nama, tipe MIME, dan ukuran file secara aman.">
+  <title>FileShore | File Metadata</title>
+  <link rel="icon" href="./favicon.ico?v=5" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=5">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=5">
+  <link rel="icon" type="image/png" sizes="48x48" href="./favicon-48x48.png?v=5">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=5">
+  <link rel="manifest" href="./manifest.webmanifest?v=5">
+  <meta name="msapplication-TileColor" content="#07120f">
+  <style>html{background:#fdfaf5;color:#2c2c2a}body{margin:0;font-family:Arial,sans-serif}noscript{display:block;margin:110px auto;padding:24px;max-width:720px;border:2px solid #1d9e75;background:#fff}</style>
+  <link rel="stylesheet" href="./styles.css">
+
+  <meta name="application-name" content="FileShore">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FileShore">
+  <link rel="stylesheet" href="./pwa-install.css?v=5">
+</head>
+<body>
+  <noscript>JavaScript diperlukan untuk menganalisis file, tetapi halaman tetap berhasil dimuat. Aktifkan JavaScript lalu muat ulang.</noscript>
+  <header class="nav">
+    <a class="brand" href="#top">File<span>Shore</span></a>
+    <nav aria-label="Navigasi"><a href="#analyser">Analyser</a><a href="#response">Response</a><a href="#api">API</a></nav>
+    <a class="nav-cta" href="#analyser">Inspect a file</a>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="badge"><i></i> Ready · private by design</div>
+        <p class="kicker">File metadata microservice</p>
+        <h1>Know every file <em>before it sails.</em><small>Name. Type. Size. Nothing unnecessary.</small></h1>
+        <p class="lead">Pilih atau jatuhkan file. FileShore membaca metadata di perangkat terlebih dahulu, sehingga halaman tetap bekerja walaupun endpoint server belum tersedia.</p>
+        <div class="steps"><span><b>01</b> Pick a file</span><span><b>02</b> Analyse safely</span><span><b>03</b> Copy JSON</span></div>
+      </div>
+      <section class="upload-card" id="analyser" aria-labelledby="upload-title">
+        <div class="card-head"><div><p>Live analyser</p><h2 id="upload-title">Inspect your file</h2></div><span id="stateDot" class="state-dot"></span></div>
+        <form id="uploadForm">
+          <input id="upfile" name="upfile" type="file" hidden>
+          <button class="drop-zone" id="dropZone" type="button">
+            <span class="upload-icon">⇧</span><strong id="dropTitle">Drop a file here</strong><span id="fileDescription">No file selected yet</span><b>Browse files</b>
+          </button>
+          <div class="file-summary"><span class="file-symbol">◇</span><div><small>Selected asset</small><strong id="fileName">Waiting for a file</strong></div><b id="fileSize">—</b></div>
+          <button class="analyse" id="analyseButton" type="submit"><span>Analyse metadata</span><b>→</b></button>
+        </form>
+        <p class="message" id="message" aria-live="polite"></p>
+      </section>
+    </section>
+    <div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V31c180 41 360-28 540 1 180 29 360-28 540 2 180 31 280-15 360 7v49Z"/></svg></div>
+    <div class="marquee"><div><span>Zero database storage</span><i>◆</i><span>JSON response</span><i>◆</i><span>Any file type</span><i>◆</i><span>Local fallback</span><i>◆</i><span>Responsive interface</span><i>◆</i><span>Zero database storage</span><i>◆</i><span>JSON response</span><i>◆</i><span>Any file type</span><i>◆</i><span>Local fallback</span><i>◆</i><span>Responsive interface</span><i>◆</i></div></div>
+    <section class="result-section" id="response">
+      <div><p class="kicker">Clean output</p><h2>Everything useful,<br><em>nothing noisy.</em></h2><p>Hasil tetap terlihat di halaman dan bisa disalin. Jika API Cloudflare aktif, request diproses oleh Worker; jika tidak, metadata dihitung secara lokal.</p></div>
+      <div class="result-card"><div class="result-top"><span>Response preview</span><strong id="responseStatus">Awaiting upload</strong></div><pre id="jsonOutput">{
+  "name": "example.png",
+  "type": "image/png",
+  "size": 12345
+}</pre><button id="copyButton" type="button" disabled>Copy response</button></div>
+    </section>
+    <section class="api-grid" id="api">
+      <article><span>POST endpoint</span><strong>/api/fileanalyse</strong><p>Multipart field: <code>upfile</code>.</p></article>
+      <article><span>Response fields</span><strong>name · type · size</strong><p>JSON sederhana dan dapat diprediksi.</p></article>
+      <article><span>Safe fallback</span><strong>Client-side metadata</strong><p>Tidak ada layar putih jika backend belum aktif.</p></article>
+    </section>
+  </main>
+  <footer><a class="brand" href="#top">File<span>Shore</span></a><p>Responsive metadata inspector · 2026</p></footer>
+  <script src="./app.js" defer></script>
+
+  <script src="./pwa-install.js?v=5" defer></script>
+</body>
+</html>
